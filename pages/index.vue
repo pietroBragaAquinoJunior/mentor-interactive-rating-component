@@ -1,6 +1,19 @@
 <template>
   <div class="h-[100vh] bg-[hsl(216,12%,8%)] flex justify-center items-center">
-    <div class="flex flex-col justify-around w-[88vw] h-[53vh] bg-gradient-to-b from-[hsla(213,19%,18%,0.8)] to-[hsla(213,19%,18%,0.5)] rounded-2xl p-5 md:w-[50vh] md:rounded-3xl md:p-8">
+    <div v-if="submitted" class="flex flex-col justify-around items-center w-[88vw] h-[53vh] bg-gradient-to-b from-[hsla(213,19%,18%,0.8)] to-[hsla(213,19%,18%,0.5)] rounded-2xl p-5 md:w-[50vh] md:rounded-3xl md:p-8">
+      <img src="/images/illustration-thank-you.svg" alt="Illustration Thank you">
+      <h1 class="text-[0.77rem] font-[700] text-[hsl(25,97%,53%)] p-2 pl-4 pr-4 bg-[hsl(213,19%,18%)] rounded-full">
+        You selected {{ rate }} out of {{ numbers.length }}
+      </h1>
+      <h1 class="text-[1.7rem]">
+        Thank you!
+      </h1>
+      <p class="text-[0.9rem] text-[hsl(217,12%,63%)] text-center">
+        We appreciate you taking the time to give a rating. If you ever need more support, don't hesitate to get in touch!
+      </p>
+    </div>
+
+    <div v-else class="flex flex-col justify-around w-[88vw] h-[53vh] bg-gradient-to-b from-[hsla(213,19%,18%,0.8)] to-[hsla(213,19%,18%,0.5)] rounded-2xl p-5 md:w-[50vh] md:rounded-3xl md:p-8">
       <div class="bg-[hsl(213,19%,18%)] w-[45px] h-[45px] flex justify-center items-center rounded-full ">
         <img src="/images/icon-star.svg" alt="Icon Star">
       </div>
@@ -28,7 +41,7 @@
           </div>
         </div>
       </div>
-      <button class="uppercase bg-[hsl(25,97%,53%)] text-[hsl(213,19%,18%)] p-3 font-[700] rounded-full text-[16px] hover:bg-[hsl(0,0%,100%)]">
+      <button @click="submit" class="uppercase bg-[hsl(25,97%,53%)] text-[hsl(213,19%,18%)] p-3 font-[700] rounded-full text-[16px] hover:bg-[hsl(0,0%,100%)]">
         submit
       </button>
     </div>
@@ -38,7 +51,11 @@
 <script setup lang="ts">
 const numbers = ref([1, 2, 3, 4, 5])
 const rate = ref(0)
+const submitted = ref(false)
 const changeRate = (value: number) => {
   rate.value = value
+}
+const submit = () => {
+  submitted.value = true
 }
 </script>
